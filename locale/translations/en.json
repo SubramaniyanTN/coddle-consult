@@ -1,0 +1,13 @@
+{
+  "welcome":{
+    "consult":"Consult an Expert",
+    "consult_description":"Get personalized advice from our experts",
+    "chat-advice":"Chat Advice",
+    "chat-advice-description":"Message a clinician for personalized advice",
+    "video-consult":"Video Consult",
+    "video-consult-description":"Connect via live video call",
+    "get-started":"Get Started"
+  }
+}
+
+
