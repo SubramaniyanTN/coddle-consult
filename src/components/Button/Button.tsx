@@ -46,7 +46,8 @@ ButtonVariant,
 { container: TwStyle<ViewStyle>; text: TwStyle<TextStyle> }
 > = {
 primary: {
-  container: tw`
+  container: disabled ?
+  tw`
     scheme:bg-button 
     w-[90%] 
     h-[50px] 
@@ -54,7 +55,16 @@ primary: {
     flex-row 
     items-center 
     justify-center
-  `,
+    opacity-50
+    `:tw`
+    scheme:bg-button 
+    w-[90%] 
+    h-[50px] 
+    rounded-[10px] 
+    flex-row 
+    items-center 
+    justify-center
+    `,
   text: tw`
     text-[17px] 
     font-semibold 

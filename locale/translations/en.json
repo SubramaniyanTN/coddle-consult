@@ -1,4 +1,17 @@
 {
+  "login":{
+    "concern":"Concern",
+    "concern-placeholder":"Enter your concern",
+    "preference":"Preference",
+    "preference-placeholder":"Select your preference",
+    "error-preference":"Please select your preference",
+    "chat":"Chat",
+    "video":"Video",
+    "concern-error":"Concern is required",
+    "concern-min-error":"Concern must be minimum 10 characters",
+    "concern-max-error":"Concern must be less than 100 characters",
+    "preference-error":"Please select your preference"
+  },
   "welcome":{
     "consult":"Consult an Expert",
     "consult_description":"Get personalized advice from our experts",
@@ -7,6 +20,14 @@
     "video-consult":"Video Consult",
     "video-consult-description":"Connect via live video call",
     "get-started":"Get Started"
+  },
+  "payment":{
+    "doctor-name":"Laura Wilson , MD",
+    "doctor-description":"Experience cardiologist dedicated to providing high quality patient care.Specializes in preventive cardiology and heart health.",
+    "confirm-pay":"Confirm & Pay",
+    "i-agree-to-the-terms-and-conditions-error":"You must agree to the terms and conditions",
+    "agree-to-terms-and-conditions":"I agree to the terms and conditions.",
+    "amount":"$50"
   }
 }
 

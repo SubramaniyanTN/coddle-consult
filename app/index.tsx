@@ -1,6 +1,8 @@
 import { TranslationKeys } from "@/locale";
 import { Button, Card, ThemedText } from "@/src/components";
 import { ThemedSVG } from "@/ThemeSvg";
+import { router } from "expo-router";
+import { useState } from "react";
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -20,6 +22,12 @@ const WelcomeCard = ({title, description,icon}: {title: TranslationKeys, descrip
 }
 
 export default function Index() {
+  const [isDisabled, setIsDisabled] = useState(false);
+  const handleNavigation = () => {
+    setIsDisabled(true);
+    router.push('/login');
+    setIsDisabled(false);
+  }
   return (
     <SafeAreaView className="flex-1 items-center p-[10px] gap-[20px] justify-center scheme:bg-background">
       
@@ -37,7 +45,7 @@ export default function Index() {
       <WelcomeCard icon="comment" title="welcome.chat-advice" description="welcome.chat-advice-description" />
       <WelcomeCard icon="videoCam" title="welcome.video-consult" description="welcome.video-consult-description" />
       </View>
-      <Button label="welcome.get-started" variant="primary" className="mt-[10px]" />
+      <Button onPress={handleNavigation} disabled={isDisabled} label="welcome.get-started" variant="primary" className="mt-[10px]" />
     </SafeAreaView>
   );
 }
