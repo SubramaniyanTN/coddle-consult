@@ -78,7 +78,6 @@ export default function Chat() {
        <GiftedChat
       messages={messages}
       onSend={newMessage => {
-        console.log({newMessage:JSON.stringify(newMessage)})
         onSend([{_id:messages.length+1,text:newMessage[0].text,createdAt:new Date(),user:currentUser}])
       }}
       user={{
