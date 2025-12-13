@@ -1,11 +1,13 @@
-import { Stack } from "expo-router";
-
+import { persistor, store } from "@/redux/store";
+import { InitialLayout } from "@/src/components";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 export default function RootLayout() {
   return (
-    <Stack initialRouteName="payment" screenOptions={{ headerShown: false }} >
-      <Stack.Screen name="index" />
-      <Stack.Screen name="login" />
-      <Stack.Screen name="payment" />
-    </Stack>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+      <InitialLayout />
+      </PersistGate>
+    </Provider>
   )
 }

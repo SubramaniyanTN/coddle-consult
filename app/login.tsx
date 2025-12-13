@@ -1,5 +1,5 @@
 import { useCustomTranslation } from "@/locale";
-import { Button, Input, Radio } from "@/src/components";
+import { Button, Input, Radio, ThemedText } from "@/src/components";
 import { LoginSchema, useLoginSchema } from "@/src/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { router } from "expo-router";
@@ -36,6 +36,7 @@ export default function Login() {
   return (
     <SafeAreaView className="flex-1 justify-center p-[10px]">
     <FormProvider {...methods}>
+      <ThemedText variant="title" textContent="login.fill-out-form" className="text-center mb-5" />
         <Input name="concern" label="login.concern" placeholder="login.concern-placeholder" />
         <Radio label="login.preference" name="preference" radioButtons={radioButtons} />
         <Button disabled={isDisabled} className="w-full mt-3" onPress={methods.handleSubmit(handleSubmit)} label="login.preference" />

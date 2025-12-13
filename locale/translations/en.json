@@ -10,7 +10,8 @@
     "concern-error":"Concern is required",
     "concern-min-error":"Concern must be minimum 10 characters",
     "concern-max-error":"Concern must be less than 100 characters",
-    "preference-error":"Please select your preference"
+    "preference-error":"Please select your preference",
+    "fill-out-form":"Please Fill out the form"
   },
   "welcome":{
     "consult":"Consult an Expert",
@@ -28,6 +29,10 @@
     "i-agree-to-the-terms-and-conditions-error":"You must agree to the terms and conditions",
     "agree-to-terms-and-conditions":"I agree to the terms and conditions.",
     "amount":"$50"
+  },
+  "chat":{
+    "doctor-name":"Laura Wilson , MD",
+    "doctor-bio":"Cardiologist · Online"
   }
 }
 

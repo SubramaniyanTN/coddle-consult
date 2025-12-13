@@ -1,16 +1,16 @@
+import { setUserData } from "@/redux/auth/authReducer";
+import { useAppDispatch } from "@/redux/hooks/hooks";
 import { Avatar, Button, Checkbox, ThemedText } from "@/src/components";
 import { PaymentSchema, usePaymentSchema } from "@/src/schema/payment.schema";
+import { AVATAR } from "@/src/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { SafeAreaView } from "react-native-safe-area-context";
-const AVATAR={
-    blurhash:'LEOgB3D$_N?b~qxvtSRjIot6D$IV',
-    name:'Doctor',
-    image:'https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsb2ZmaWNlMV9waG90b2dyYXBoeV9vZl9hbl9zb3V0aF9pbmRpYW5fd29tZW5fYXNfYV9kb2N0b19kMzAxMDM3Zi03MDUzLTQxNDAtYmYyZS1lZDFlYWE0YTM3NDRfMS5qcGc.jpg'
-}
+
 
 export default function Payment() {
   const paymentSchema = usePaymentSchema();
+  const dispatch = useAppDispatch();
   const methods = useForm({
     resolver:zodResolver(paymentSchema),
     defaultValues: {
@@ -18,7 +18,7 @@ export default function Payment() {
     },
   });
   const onSubmit:SubmitHandler<PaymentSchema> = (data ) => {
-    console.log({data});
+    dispatch(setUserData({isAuthenticated:true}));
   }
   return (
     <FormProvider {...methods}>
