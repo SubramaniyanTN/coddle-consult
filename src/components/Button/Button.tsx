@@ -2,119 +2,146 @@ import { TranslationKeys, useCustomTranslation } from "@/locale";
 import { tw, TwStyle } from "@mgcrea/react-native-tailwind";
 import * as Haptics from "expo-haptics";
 import React, { useEffect, useState } from "react";
-import {
-    GestureResponderEvent,
-    Pressable,
-    PressableProps,
-    Text,
-    TextStyle,
-    View,
-    ViewStyle
-} from "react-native";
+import { Pressable, Text, TextStyle, View, ViewStyle } from "react-native";
 import Animated, {
-    Easing,
-    runOnJS,
-    useAnimatedStyle,
-    useSharedValue,
-    withRepeat,
-    withSequence,
-    withTiming,
+  runOnJS,
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withSequence,
+  withTiming
 } from "react-native-reanimated";
 
-const buttonVariants: Record<"primary", { button: TwStyle<ViewStyle>, text: TwStyle<TextStyle> }> = {
-  primary: {
-    button: tw`scheme:bg-button w-[80%] h-[50px] rounded-[10px] flex items-center justify-center`,
-    text: tw`scheme:text-buttonText`,
-  }
-};
+type ButtonVariant = "primary" | "secondary";
 
-type ScalableButtonProps = PressableProps & {
-  value?: number;
-  isError?: boolean;
-  variants: keyof typeof buttonVariants;
+
+type ButtonProps = {
   label: TranslationKeys;
+  variant?: ButtonVariant;
+  isError?: boolean;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
+  onPress?: () => void;
+  disabled?: boolean;
+  style?: any;
+  className?: string;
   textClassName?: string;
-  leftIcon?: React.ReactNode; // <-- NEW
-  rightIcon?: React.ReactNode; // <-- NEW (optional)
 };
 
-function Button({
-  isError = false,
-  variants,
+export default function Button({
   label,
+  variant = "primary",
+  isError = false,
+  disabled = false,
   leftIcon,
   rightIcon,
-  ...props
-}: ScalableButtonProps) {
+  onPress,
+  style,
+  className,
+  textClassName,
+}: ButtonProps) {
+
+const buttonVariants: Record<
+ButtonVariant,
+{ container: TwStyle<ViewStyle>; text: TwStyle<TextStyle> }
+> = {
+primary: {
+  container: tw`
+    scheme:bg-button 
+    w-[90%] 
+    h-[50px] 
+    rounded-[10px] 
+    flex-row 
+    items-center 
+    justify-center
+  `,
+  text: tw`
+    text-[17px] 
+    font-semibold 
+    scheme:text-buttonText
+  `,
+},
+
+secondary: {
+  container: tw`
+    scheme:bg-surface 
+    w-[80%] 
+    h-[50px] 
+    rounded-[10px] 
+    border 
+    scheme:border-cardBorder 
+    flex-row 
+    items-center 
+    justify-center
+  `,
+  text: tw`
+    text-[17px] 
+    font-semibold 
+    scheme:text-text
+  `,
+},
+};
+  const t = useCustomTranslation();
+  const labelText = t(label);
+
   const scale = useSharedValue(1);
   const shake = useSharedValue(0);
-  const [disabled, setDisabled] = useState(false);
+  const [lock, setLock] = useState(false);
 
   const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
-  const t=useCustomTranslation()
-  const labelText=t(label)
-  const animatedStyle = useAnimatedStyle(() => ({
+
+  const animatedScaleStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],
   }));
 
-  const shakeAnimatedStyle = useAnimatedStyle(() => ({
+  const animatedShakeStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: shake.value }],
   }));
 
-  const handlePress = (event: GestureResponderEvent) => {
+  const handlePress = () => {
     scale.value = withSequence(
       withTiming(0.95, { duration: 100 }),
       withTiming(1, { duration: 120 })
     );
-    props?.onPress?.(event);
+    onPress?.();
   };
 
   const triggerShake = () => {
-    setDisabled(true);
+    setLock(true);
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
 
     shake.value = withSequence(
-      withTiming(-10, { duration: 40, easing: Easing.linear }),
-      withRepeat(
-        withTiming(10, { duration: 80, easing: Easing.linear }),
-        6,
-        true
-      ),
-      withTiming(0, { duration: 40 }, (finished) => {
-        if (finished) runOnJS(setDisabled)(false);
-      })
+      withTiming(-10, { duration: 40 }),
+      withRepeat(withTiming(10, { duration: 80 }), 6, true),
+      withTiming(0, { duration: 40 }, () => runOnJS(setLock)(false))
     );
   };
 
   useEffect(() => {
     if (isError) triggerShake();
   }, [isError]);
-  console.log(buttonVariants[variants].button.style);
+
+  const variantStyle = buttonVariants[variant];
+
   return (
     <AnimatedPressable
-      {...props}
-      disabled={props.disabled || disabled}
-      testID={`${label}-button`}
-      style={[ animatedStyle, shakeAnimatedStyle,buttonVariants[variants].button.style, props.style]}
+      disabled={disabled || lock}
       onPress={handlePress}
+      className={className}
+      style={[
+        animatedScaleStyle,
+        animatedShakeStyle,
+        variantStyle.container.style, // ← SAME AS ThemedText
+        style,
+      ]}
     >
-      {/* LEFT ICON */}
-      {leftIcon && <View className="mr-[4px]">{leftIcon}</View>}
+      {leftIcon && <View className="mr-2">{leftIcon}</View>}
 
-      {/* LABEL */}
-      {typeof label === "string" ? (
-        <Text
-          testID={`${label}-text`}
-          style={buttonVariants[variants].text.style}
-          >{labelText}</Text>
-      ) : (
-        label
-      )}
+      <Text className={textClassName} style={variantStyle.text.style}>
+        {labelText}
+      </Text>
 
-      {/* RIGHT ICON */}
-      {rightIcon && <View className="ml-[4px]">{rightIcon}</View>}
+      {rightIcon && <View className="ml-2">{rightIcon}</View>}
     </AnimatedPressable>
   );
 }
-
-export default Button;

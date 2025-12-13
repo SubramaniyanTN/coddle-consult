@@ -21,22 +21,23 @@ const WelcomeCard = ({title, description,icon}: {title: TranslationKeys, descrip
 
 export default function Index() {
   return (
-    <SafeAreaView className="flex-1 items-center p-[10px] gap-[10px] justify-center scheme:bg-background">
+    <SafeAreaView className="flex-1 items-center p-[10px] gap-[20px] justify-center scheme:bg-background">
       
       {/* Title */}
+      <View className="flex flex-col items-center justify-center gap-[10px]">
       <ThemedText variant="title" textContent="welcome.consult" className="text-center" />
-      
       {/* Subtitle */}
       <ThemedText
         variant="subtitle"
         textContent="welcome.consult_description"
         className="text-center"
       />
+      </View>
       <View className="w-[100%] flex flex-col items-center justify-between gap-[10px]" >
       <WelcomeCard icon="comment" title="welcome.chat-advice" description="welcome.chat-advice-description" />
       <WelcomeCard icon="videoCam" title="welcome.video-consult" description="welcome.video-consult-description" />
       </View>
-      <Button label="welcome.get-started" variants="primary" />
+      <Button label="welcome.get-started" variant="primary" className="mt-[10px]" />
     </SafeAreaView>
   );
 }
