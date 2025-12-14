@@ -27,7 +27,6 @@ type AvatarProps=Partial<ImageProps> & {
 }
 
 export default function Avatar({name,onPress,size=36,showAvatar=false ,isTwoLetter=false, ...props}:AvatarProps){
-  const [isLoading,setIsLoading]=useState(true)
   const [error,setError]=useState(false)
   const avatarColor=COLORS[Math.floor(Math.random()*COLORS.length)]
   const avatarStyle:ViewStyle={width:size,height:size,borderRadius:50}
@@ -39,13 +38,10 @@ export default function Avatar({name,onPress,size=36,showAvatar=false ,isTwoLett
       </View>
     )
   }
-  console.log({props})
   return (
     <Pressable className="rounded-full flex items-center justify-center " style={[avatarStyle,error && !showAvatar ? {backgroundColor:avatarColor} : {}]} onPress={onPress}>
-     {error? <ThemedText className="text-[14px] font-bold text-white" children={nameInitial.toLocaleUpperCase()} /> :  <Image 
+     {error && (!props.placeholder?.["blurhash"]) ? <ThemedText variant="title" className="text-white" children={nameInitial.toLocaleUpperCase()} /> :  <Image 
       {...props}
-      onLoadStart={()=>setIsLoading(true)}
-      onLoadEnd={()=>setIsLoading(false)}
       onError={()=>setError(true)}
       style={[avatarStyle as ImageStyle,props.style]} />}
       </Pressable>

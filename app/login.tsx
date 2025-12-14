@@ -30,7 +30,7 @@ export default function Login() {
         }], [chatLabel, videoLabel]);
   const handleSubmit:SubmitHandler<LoginSchema> = (data) => {
     setIsDisabled(true);
-    router.push('/payment');
+    router.push(`/payment?message=${data.concern}`);
     setIsDisabled(false);
   }
   return (

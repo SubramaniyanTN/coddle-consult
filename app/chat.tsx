@@ -1,12 +1,13 @@
+import { useAppSelector } from "@/redux/hooks/hooks";
 import { AVATAR } from "@/src/utils";
 import { useCallback, useEffect, useState } from "react";
-import { Platform, } from "react-native";
+import { ActivityIndicator, Platform, View, } from "react-native";
 import { Bubble, GiftedChat } from 'react-native-gifted-chat';
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
-
+import uuid from 'react-native-uuid';
 
 type MessageType={
-    _id: number;
+    _id: string;
     text: string;
     createdAt: Date;
     user: {
@@ -17,6 +18,8 @@ type MessageType={
 }[]
 export default function Chat() {
   const [messages, setMessages] = useState<MessageType>([])
+  const {concern}=useAppSelector((state)=>state.AuthReducer)
+  const [isTyping, setIsTyping] = useState<boolean>(false)
   const insets = useSafeAreaInsets()
 
   // If you have a tab bar, include its height
@@ -33,18 +36,18 @@ export default function Chat() {
     name: 'Doctor',
     avatar: AVATAR.image,
   }
-
+  console.log({messages})
   useEffect(() => {
     setMessages([
       {
-        _id: 1,
-        text: 'Hi , Can we check the time where doctor is available ?',
+        _id: uuid.v4(),
+        text: concern??'Hi , Can we check the time where doctor is available ?',
         createdAt: new Date(),
         user: currentUser,
       },
       {
-        _id: 2,
-        text: 'Hi , Can we check the time where doctor is available ?',
+        _id: uuid.v4(),
+        text: 'Hi , what is your concern ?',
         createdAt: new Date(),
         user: doctorUser,
       },
@@ -67,10 +70,18 @@ export default function Chat() {
     ];
     return colors[sumChars % colors.length];
   }
-  const onSend = useCallback((messages :MessageType) => {
+  const appendMessage=(message:MessageType)=>{
     setMessages(previousMessages =>
-      GiftedChat.append(previousMessages, messages),
+      GiftedChat.append(previousMessages, message),
     )
+  }
+  const onSend = useCallback((messages :MessageType) => {
+    appendMessage(messages)
+    setIsTyping(true)
+    setTimeout(()=>{
+      setIsTyping(false)
+      appendMessage([{_id:uuid.v4(),text:'This is a test message',createdAt:new Date(),user:doctorUser}])
+    }, 1000)
   }, [])
 
     return (
@@ -78,7 +89,7 @@ export default function Chat() {
        <GiftedChat
       messages={messages}
       onSend={newMessage => {
-        onSend([{_id:messages.length+1,text:newMessage[0].text,createdAt:new Date(),user:currentUser}])
+        onSend([{_id:uuid.v4(),text:newMessage[0].text,createdAt:new Date(),user:currentUser}])
       }}
       user={{
         _id: 1,
@@ -96,6 +107,14 @@ export default function Chat() {
           backgroundColor: color
         }
       }} />)}}
+      isTyping={isTyping}
+      renderLoading={()=>{
+        return(
+          <View className="flex-1 items-center justify-center">
+            <ActivityIndicator size="large" color="black" />
+          </View>
+        )
+      }}
       keyboardAvoidingViewProps={{ keyboardVerticalOffset }}
     />
     </SafeAreaView>
