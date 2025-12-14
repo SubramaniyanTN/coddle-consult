@@ -1,9 +1,12 @@
 import { TranslationKeys, useCustomTranslation } from "@/locale";
 import { tw, TwStyle } from "@mgcrea/react-native-tailwind";
 import * as Haptics from "expo-haptics";
-import React, { useEffect, useState } from "react";
+import React, { ComponentProps, useEffect, useState } from "react";
 import { Pressable, Text, TextStyle, View, ViewStyle } from "react-native";
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+
 import Animated, {
+  FadeInDown,
   runOnJS,
   useAnimatedStyle,
   useSharedValue,
@@ -15,7 +18,7 @@ import Animated, {
 type ButtonVariant = "primary" | "secondary";
 
 
-type ButtonProps = {
+type ButtonProps =Partial<Omit<ComponentProps<typeof AnimatedPressable>,"style"|"key">> & {
   label: TranslationKeys;
   variant?: ButtonVariant;
   isError?: boolean;
@@ -39,6 +42,7 @@ export default function Button({
   style,
   className,
   textClassName,
+  ...otherProps
 }: ButtonProps) {
 
 const buttonVariants: Record<
@@ -98,7 +102,6 @@ secondary: {
   const shake = useSharedValue(0);
   const [lock, setLock] = useState(false);
 
-  const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
   const animatedScaleStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],
@@ -137,7 +140,9 @@ secondary: {
     <AnimatedPressable
       disabled={disabled || lock}
       onPress={handlePress}
+      entering={FadeInDown.duration(1000)}
       className={className}
+      {...otherProps}
       style={[
         animatedScaleStyle,
         animatedShakeStyle,

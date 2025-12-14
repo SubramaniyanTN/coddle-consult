@@ -2,7 +2,7 @@ import { TranslationKeys, useCustomTranslation } from "@/locale";
 import { tw, TwStyle } from "@mgcrea/react-native-tailwind";
 import { ComponentProps } from "react";
 import { Text, TextStyle } from "react-native";
-import Animated from "react-native-reanimated";
+import Animated, { FadeInDown } from "react-native-reanimated";
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 
@@ -43,6 +43,7 @@ const variantStyles: Record<TextVariant, TwStyle<TextStyle>> = {
   const variantStyle = variantStyles[variant];
   return (
     <AnimatedText
+    entering={FadeInDown.duration(1000)}
       {...rest}
       className={className}
       style={[variantStyle.style,rest.style]} // ← Apply pre-compiled style
