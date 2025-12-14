@@ -6,10 +6,7 @@ import { useState } from "react";
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const WelcomeCard = ({title, description,icon}: {title: TranslationKeys, description: TranslationKeys, icon: "videoCam" | "comment"}) => {
-  const onPress = () => {
-    console.log('WelcomeCard pressed');
-  }
+const WelcomeCard = ({title, description,icon,onPress}: {title: TranslationKeys, description: TranslationKeys, icon: "videoCam" | "comment", onPress: () => void}) => {
   return (
     <Card onPress={onPress}>
       <ThemedSVG variants={icon} themedFill="svg-primary" />
@@ -42,8 +39,8 @@ export default function Index() {
       />
       </View>
       <View className="w-[100%] flex flex-col items-center justify-between gap-[10px]" >
-      <WelcomeCard icon="comment" title="welcome.chat-advice" description="welcome.chat-advice-description" />
-      <WelcomeCard icon="videoCam" title="welcome.video-consult" description="welcome.video-consult-description" />
+      <WelcomeCard onPress={handleNavigation} icon="comment" title="welcome.chat-advice" description="welcome.chat-advice-description" />
+      <WelcomeCard onPress={handleNavigation} icon="videoCam" title="welcome.video-consult" description="welcome.video-consult-description" />
       </View>
       <Button onPress={handleNavigation} disabled={isDisabled} label="welcome.get-started" variant="primary" className="mt-[10px]" />
     </SafeAreaView>
