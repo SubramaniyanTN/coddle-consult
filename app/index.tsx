@@ -4,6 +4,7 @@ import { ThemedSVG } from "@/ThemeSvg";
 import { router } from "expo-router";
 import { useState } from "react";
 import { View } from "react-native";
+import { FadeIn } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const WelcomeCard = ({title, description,icon,onPress}: {title: TranslationKeys, description: TranslationKeys, icon: "videoCam" | "comment", onPress: () => void}) => {
@@ -30,7 +31,7 @@ export default function Index() {
       
       {/* Title */}
       <View className="flex flex-col items-center justify-center gap-[10px]">
-      <ThemedText variant="title" textContent="welcome.consult" className="text-center" />
+      <ThemedText entering={FadeIn.duration(1000)} variant="title" textContent="welcome.consult" className="text-center" />
       {/* Subtitle */}
       <ThemedText
         variant="subtitle"

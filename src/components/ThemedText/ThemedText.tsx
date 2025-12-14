@@ -1,6 +1,10 @@
 import { TranslationKeys, useCustomTranslation } from "@/locale";
 import { tw, TwStyle } from "@mgcrea/react-native-tailwind";
-import { Text, TextProps, TextStyle } from "react-native";
+import { ComponentProps } from "react";
+import { Text, TextStyle } from "react-native";
+import Animated from "react-native-reanimated";
+
+const AnimatedText = Animated.createAnimatedComponent(Text);
 
 type TextVariant =
   | "title"
@@ -10,7 +14,7 @@ type TextVariant =
   | "button"
   | "label"|"cardCaption";
 
-type ThemedTextProps = TextProps & {
+type ThemedTextProps = ComponentProps<typeof AnimatedText> & {
   textContent?: TranslationKeys;
   variant?: TextVariant;
   className?: string;
@@ -38,12 +42,12 @@ const variantStyles: Record<TextVariant, TwStyle<TextStyle>> = {
   const text = textContent ? translation(textContent) : children;
   const variantStyle = variantStyles[variant];
   return (
-    <Text
+    <AnimatedText
       {...rest}
       className={className}
       style={[variantStyle.style,rest.style]} // ← Apply pre-compiled style
     >
       {text}
-    </Text>
+    </AnimatedText>
   );
 }
