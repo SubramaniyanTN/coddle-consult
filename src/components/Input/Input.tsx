@@ -1,9 +1,12 @@
 import { TranslationKeys, useCustomTranslation } from "@/locale";
 import useThemeColors from "@/src/utils/useThemedColors";
 import { TextInput } from "@mgcrea/react-native-tailwind";
+import { ComponentProps } from "react";
 import { useController, useFormContext } from "react-hook-form";
 import { StyleProp, Text, TextStyle, View, ViewStyle } from "react-native";
-type InputProps = {
+import Animated, { FadeInDown } from "react-native-reanimated";
+const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
+type InputProps = Omit<ComponentProps<typeof AnimatedTextInput>,"style"|"key"|"value"|"onChangeText"|"onBlur"> & {
   label?: TranslationKeys;
   placeholder?: TranslationKeys;
   // Style props
@@ -26,7 +29,8 @@ function Input({
   inputStyle,
   labelStyle,
   errorStyle,
-  name
+  name,
+  ...otherProps
 }: InputProps) {
 const { control } = useFormContext();
 const translation = useCustomTranslation();
@@ -44,7 +48,9 @@ const {
           {translatedLabel}
         </Text>
       )}
-      <TextInput
+      <AnimatedTextInput
+        entering={FadeInDown.duration(1000)}
+        {...otherProps}
         className="border-2 border-gray-300 focus:border-blue-500 p-3 rounded-lg bg-white"
         style={inputStyle}
         placeholder={translatedPlaceholder}

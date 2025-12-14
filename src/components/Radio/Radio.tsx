@@ -3,7 +3,8 @@ import useThemeColors from "@/src/utils/useThemedColors";
 import { useController, useFormContext } from "react-hook-form";
 import { StyleProp, Text, TextStyle, View } from "react-native";
 import RadioGroup, { RadioButtonProps } from "react-native-radio-buttons-group";
-
+import Animated, { FadeInDown } from 'react-native-reanimated';
+const AnimatedView = Animated.createAnimatedComponent(View);
 type RadioProps = {
     label?: TranslationKeys
     labelStyle?: StyleProp<TextStyle>
@@ -22,7 +23,7 @@ export default function Radio({label, radioButtons,labelStyle,name,errorStyle}: 
     const colors =useThemeColors();
     const translatedLabel=label ? translation(label) : undefined;
   return (
-    <View className="flex flex-col gap-2">
+    <AnimatedView entering={FadeInDown.duration(1000)} className="flex flex-col gap-2">
     {translatedLabel && (
         <Text className="text-lg font-semibold scheme:text-text mb-2" style={labelStyle}>
           {translatedLabel}
@@ -40,6 +41,6 @@ export default function Radio({label, radioButtons,labelStyle,name,errorStyle}: 
           {error.message}
         </Text>
       )}
-    </View>
+    </AnimatedView>
   )
 }
