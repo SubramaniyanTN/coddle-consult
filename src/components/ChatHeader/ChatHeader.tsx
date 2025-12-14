@@ -1,12 +1,16 @@
+import { Avatar, Logout, ThemedText } from "@/src/components";
 import { AVATAR } from "@/src/utils";
 import { ThemedSVG } from "@/ThemeSvg";
+import { useState } from "react";
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Avatar from "../Avatar/Avatar";
-import ThemedText from "../ThemedText/ThemedText";
 
 export default function ChatHeader() {
+    const [modalVisible, setModalVisible] = useState(false);
     const {top}=useSafeAreaInsets()
+    const handleLogout = () => {
+        setModalVisible(true);
+    }
     return (
         <View className="flex flex-row items-center px-[10px] gap-[10px] justify-between" style={{paddingTop:top}}>
            <View className="flex flex-row items-center justify-center gap-[10px]">
@@ -16,7 +20,8 @@ export default function ChatHeader() {
             <ThemedText variant="subtitle" textContent="chat.doctor-bio" />
             </View>
            </View>
-            <ThemedSVG width={30} height={30} variants="settingsPower" themedFill="svg-primary" />
+            <ThemedSVG width={30} height={30} variants="settingsPower" themedFill="svg-primary" onPress={handleLogout} />
+            <Logout modalVisible={modalVisible} setModalVisible={setModalVisible} />
         </View>
     )
 }

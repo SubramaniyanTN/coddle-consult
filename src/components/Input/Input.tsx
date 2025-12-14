@@ -1,4 +1,5 @@
 import { TranslationKeys, useCustomTranslation } from "@/locale";
+import useThemeColors from "@/src/utils/useThemedColors";
 import { TextInput } from "@mgcrea/react-native-tailwind";
 import { useController, useFormContext } from "react-hook-form";
 import { StyleProp, Text, TextStyle, View, ViewStyle } from "react-native";
@@ -35,10 +36,11 @@ const {
     field: { value, onChange, onBlur },
     fieldState: { error },
   } = useController({ name, control });
+  const colors =useThemeColors();
   return (
     <View className="mb-4 flex flex-col gap-2" style={style}>
       {translatedLabel && (
-        <Text className="text-lg font-semibold text-text mb-2" style={labelStyle}>
+        <Text className="text-lg font-semibold scheme:text-text mb-2" style={labelStyle}>
           {translatedLabel}
         </Text>
       )}
@@ -48,6 +50,7 @@ const {
         placeholder={translatedPlaceholder}
         value={value}
         onChangeText={onChange}
+        placeholderTextColor={colors["placeholder"]}
       />
       {error?.message && (
         <Text className="text-sm text-red-600 mt-1" style={errorStyle}>

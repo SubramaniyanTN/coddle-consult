@@ -41,7 +41,7 @@ export default {
         /* Card surfaces */
         card: {
           light: "#FFF",
-          dark: "#000",
+          dark: "#4A4A4A",
         },
     
         /* Card borders / separators */

@@ -33,6 +33,12 @@
   "chat":{
     "doctor-name":"Laura Wilson , MD",
     "doctor-bio":"Cardiologist · Online"
+  },
+  "logout":{
+    "title":"Logout",
+    "yes":"Yes",
+    "cancel":"Cancel",
+    "logout-confirmation":"Are you sure you want to logout?"
   }
 }
 
