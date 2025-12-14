@@ -7,14 +7,6 @@ import ChatHeader from "../ChatHeader/ChatHeader";
 export default function InitialLayout() {
   const colors = useThemedColors()
     const {isAuthenticated}=useAppSelector((state)=>state.AuthReducer)
-    console.log({
-      primary:"red",
-      background:colors["background"],
-      card:colors["card"],
-      text:colors["text"],
-      border:colors["cardBorder"],
-      notification:colors["text"],
-    })
     return (
       <NavigationThemeProvider value={{
         colors:{

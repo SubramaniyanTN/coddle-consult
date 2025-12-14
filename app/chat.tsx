@@ -36,7 +36,6 @@ export default function Chat() {
     name: 'Doctor',
     avatar: AVATAR.image,
   }
-  console.log({messages})
   useEffect(() => {
     setMessages([
       {
