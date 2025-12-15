@@ -34,6 +34,7 @@ Xcode (for running on iOS simulator)
 macOS (required for iOS builds)
 
 🛠️ Installation & Running the Project
+
 1️⃣ Clone the Repository
 git clone https://github.com/SubramaniyanTN/coddle-consult
 
