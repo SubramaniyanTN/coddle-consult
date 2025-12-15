@@ -1,53 +1,66 @@
-This is the Demo Video ( Test cases can be find within Project Folder ) :
-https://github.com/user-attachments/assets/6a3e1d3e-3f64-4356-aae5-6e6c0f151e75
+📱 Coddle Consult – Mobile Application
 
-# Welcome to your Expo app 👋
+Coddle Consult is a mobile application built using Expo (React Native). This project demonstrates core functionalities along with implemented test cases, which can be found inside the project folder.
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+🎥 Demo Video
 
-## Get started
+Watch the demo video showcasing the app flow and features:
 
-1. Install dependencies
+🔗 Demo Video Link
+https://github.com/user-attachments/assets/0fd1a13b-038f-4dd9-bc8c-206c0edd4603
 
-   ```bash
-   npm install
-   ```
+📌 Note: All test cases are available within the project folder.
 
-2. Start the app
+🚀 Getting Started
 
-   ```bash
-   npx expo start
-   ```
+Follow the steps below to set up and run the project locally.
 
-In the output, you'll find options to open the app in a
+📋 Prerequisites
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+Make sure you have the following installed:
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Node.js (v16 or later recommended)
 
-## Get a fresh project
+npm or yarn
 
-When you're ready, run:
+Expo CLI
 
-```bash
-npm run reset-project
-```
+Xcode (for running on iOS simulator)
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+macOS (required for iOS builds)
 
-## Learn more
+🛠️ Installation & Running the Project
+1️⃣ Clone the Repository
+git clone https://github.com/SubramaniyanTN/coddle-consult
 
-To learn more about developing your project with Expo, look at the following resources:
+2️⃣ Navigate to Project Directory
+cd coddle-consult
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+3️⃣ Install Dependencies
+npm install
 
-## Join the community
+4️⃣ Run the Application (iOS)
+npx expo run:ios
 
-Join our community of developers creating universal apps.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+This command will:
+
+Build the app
+
+Launch it on the iOS simulator
+
+🧪 Testing
+
+Test cases are included inside the project folder
+
+Follow the test documentation provided within the repository to execute them
+
+🧩 Tech Stack
+
+React Native
+
+Expo
+
+JavaScript / TypeScript
+
+npm
