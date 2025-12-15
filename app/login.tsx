@@ -39,7 +39,7 @@ export default function Login() {
       <ThemedText variant="title" textContent="login.fill-out-form" className="text-center mb-5" />
         <Input name="concern" label="login.concern" placeholder="login.concern-placeholder" />
         <Radio label="login.preference" name="preference" radioButtons={radioButtons} />
-        <Button disabled={isDisabled} className="w-full mt-3" onPress={methods.handleSubmit(handleSubmit)} label="login.preference" />
+        <Button disabled={isDisabled} className="w-full mt-3" onPress={methods.handleSubmit(handleSubmit)} label="login.submit" />
     </FormProvider>
     </SafeAreaView>
   )

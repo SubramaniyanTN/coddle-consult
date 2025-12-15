@@ -50,6 +50,7 @@ const {
       )}
       <AnimatedTextInput
         entering={FadeInDown.duration(1000)}
+        testID={placeholder}
         {...otherProps}
         className="border-2 border-gray-300 focus:border-blue-500 p-3 rounded-lg bg-white"
         style={inputStyle}

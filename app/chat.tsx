@@ -3,7 +3,8 @@ import { AVATAR } from "@/src/utils";
 import { useCallback, useEffect, useState } from "react";
 import { ActivityIndicator, Platform, View, } from "react-native";
 import { Bubble, GiftedChat } from 'react-native-gifted-chat';
-import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
+import { KeyboardAvoidingView } from "react-native-keyboard-controller";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import uuid from 'react-native-uuid';
 
 type MessageType={
@@ -84,7 +85,7 @@ export default function Chat() {
   }, [])
 
     return (
-      <SafeAreaView className="flex-1 p-5">
+      <View className="flex-1 p-5">
        <GiftedChat
       messages={messages}
       onSend={newMessage => {
@@ -116,6 +117,9 @@ export default function Chat() {
       }}
       keyboardAvoidingViewProps={{ keyboardVerticalOffset }}
     />
-    </SafeAreaView>
+     {
+      Platform.OS === 'android' && <KeyboardAvoidingView behavior="padding" />
+   }
+    </View>
   )
 }

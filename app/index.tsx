@@ -8,7 +8,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const WelcomeCard = ({title, description,icon,onPress}: {title: TranslationKeys, description: TranslationKeys, icon: "videoCam" | "comment", onPress: () => void}) => {
   return (
-    <Card onPress={onPress}>
+    <Card testID={title} onPress={onPress}>
       <ThemedSVG variants={icon} themedFill="svg-primary" />
       <View className="flex-1 flex flex-col items-center gap-[5px] justify-center">
         <ThemedText variant="cardCaption" textContent={title} />

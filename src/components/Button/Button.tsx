@@ -141,6 +141,7 @@ secondary: {
       disabled={disabled || lock}
       onPress={handlePress}
       entering={FadeInDown.duration(1000)}
+      testID={label}
       className={className}
       {...otherProps}
       style={[

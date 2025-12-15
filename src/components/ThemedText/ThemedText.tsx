@@ -44,6 +44,7 @@ const variantStyles: Record<TextVariant, TwStyle<TextStyle>> = {
   return (
     <AnimatedText
     entering={FadeInDown.duration(1000)}
+    testID={textContent}
       {...rest}
       className={className}
       style={[variantStyle.style,rest.style]} // ← Apply pre-compiled style

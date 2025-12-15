@@ -28,6 +28,7 @@ export const ThemedSVG = ({
   return (
     <Icon
       hitSlop={5}
+      testID={variants}
       {...restProps}
       stroke={restProps.stroke ?? strokeColor}
       fill={restProps.fill ?? fillColor ?? "none"}

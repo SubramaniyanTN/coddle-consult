@@ -1,0 +1,62 @@
+appId: com.subramaniyanflozy.coddleconsult
+---
+- launchApp:
+    clearState: true
+- assertVisible:
+    id: welcome.consult
+- assertVisible:
+    id: welcome.chat-advice
+- assertVisible:
+    id: welcome.video-consult
+- assertVisible:
+    id: welcome.get-started
+- tapOn:
+    id: welcome.get-started
+- assertVisible:
+    id: login.fill-out-form
+- tapOn:
+    id: login.submit
+- assertVisible: Concern is required
+- assertVisible: Please select your preference
+- tapOn:
+    id: login.concern-placeholder
+- inputText: "Enquire about Cardiology !"
+- tapOn: return
+- tapOn: Chat
+- tapOn:
+    id: login.submit
+- tapOn:
+    id: payment.agree-to-terms-and-conditions
+- tapOn:
+    id: payment.confirm-pay
+- tapOn:
+    id: Type a message...
+- inputText: "May I know clinic time "
+- scrollUntilVisible:
+    element:
+      id: Type a message...
+- hideKeyboard
+- tapOn: send
+- tapOn:
+    id: settingsPower
+- assertVisible: Are you sure you want to logout?
+- tapOn:
+    id: logout.cancel
+- assertNotVisible: Are you sure you want to logout?
+- tapOn:
+    id: settingsPower
+- tapOn:
+    id: logout.yes
+- tapOn:
+    id: welcome.consult
+
+
+
+
+
+
+
+
+
+
+

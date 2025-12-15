@@ -23,6 +23,7 @@ const {
         <AnimatedCheckbox 
         entering={FadeInDown.duration(1000)}
        value={value}
+       testID={label}
        onValueChange={onChange}
        {...otherProps}
        />

@@ -32,6 +32,7 @@ export default function Radio({label, radioButtons,labelStyle,name,errorStyle}: 
     <RadioGroup 
     radioButtons={radioButtons}
     layout="row"
+    testID={name}
     onPress={onChange}
     selectedId={value}
     labelStyle={{color:colors["text"]}}
