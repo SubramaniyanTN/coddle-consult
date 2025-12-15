@@ -1,0 +1,2 @@
+
+export { ThemedSVG } from "./ThemedSvg";
