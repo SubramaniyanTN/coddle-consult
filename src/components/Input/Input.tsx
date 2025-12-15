@@ -6,6 +6,7 @@ import { useController, useFormContext } from "react-hook-form";
 import { StyleProp, Text, TextStyle, View, ViewStyle } from "react-native";
 import Animated, { FadeInDown } from "react-native-reanimated";
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
+const AnimatedText = Animated.createAnimatedComponent(Text);
 type InputProps = Omit<ComponentProps<typeof AnimatedTextInput>,"style"|"key"|"value"|"onChangeText"|"onBlur"> & {
   label?: TranslationKeys;
   placeholder?: TranslationKeys;
@@ -44,9 +45,9 @@ const {
   return (
     <View className="mb-4 flex flex-col gap-2" style={style}>
       {translatedLabel && (
-        <Text className="text-lg font-semibold scheme:text-text mb-2" style={labelStyle}>
+        <AnimatedText entering={FadeInDown.duration(1000)} className="text-lg font-semibold scheme:text-text mb-2" style={labelStyle}>
           {translatedLabel}
-        </Text>
+        </AnimatedText>
       )}
       <AnimatedTextInput
         entering={FadeInDown.duration(1000)}
