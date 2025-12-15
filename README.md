@@ -7,7 +7,11 @@ Coddle Consult is a mobile application built using Expo (React Native). This pro
 Watch the demo video showcasing the app flow and features:
 
 🔗 Demo Video Link
-https://github.com/user-attachments/assets/0fd1a13b-038f-4dd9-bc8c-206c0edd4603
+
+
+https://github.com/user-attachments/assets/90fda285-825d-44fa-89f7-1271ebf7b483
+
+
 
 📌 Note: All test cases are available within the project folder.
 
